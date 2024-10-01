@@ -25,3 +25,4 @@ rootProject.name = "qlub"
 include(":app")
 include(":core")
 include(":core:network")
+include(":core:database")
