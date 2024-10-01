@@ -1,3 +1,5 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     repositories {
         google {
@@ -21,4 +23,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "qlub"
 include(":app")
- 
+include(":core")
+include(":core:network")
