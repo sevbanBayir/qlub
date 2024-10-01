@@ -1,13 +1,26 @@
 [versions]
 agp = "8.6.1"
-kotlin = "1.9.0"
+kotlin = "1.9.24"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.6"
 activityCompose = "1.9.2"
-composeBom = "2024.04.01"
+composeBom = "2024.09.02"
+androidx-appcompat = "1.7.0"
+motif = "0.3.4"
+motifCompiler = "0.3.4"
+ribAndroid = "0.16.3"
+ribAndroidCompose = "0.16.3"
+ribCompilerTest = "0.16.3"
+ribCoroutines = "0.16.3"
+ribTest = "0.16.3"
+retrofit = "2.11.0"
+okhttp = "4.12.0"
+room = "2.6.1"
+ksp = "1.9.24-1.0.20"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -25,7 +38,32 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 
+#RIB setup
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidx-appcompat" }
+rib-android = { module = "com.uber.rib:rib-android", version.ref = "ribAndroid" }
+rib-android-compose = { module = "com.uber.rib:rib-android-compose", version.ref = "ribAndroidCompose" }
+rib-compiler-test = { module = "com.uber.rib:rib-compiler-test", version.ref = "ribCompilerTest" }
+rib-coroutines = { module = "com.uber.rib:rib-coroutines", version.ref = "ribCoroutines" }
+rib-test = { module = "com.uber.rib:rib-test", version.ref = "ribTest" }
+
+# Motif
+motif = { module = "com.uber.motif:motif", version.ref = "motif" }
+motif-compiler = { module = "com.uber.motif:motif-compiler", version.ref = "motifCompiler" }
+
+#Retrofit
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
+gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+
+#Room DB
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
+kotlinKapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
