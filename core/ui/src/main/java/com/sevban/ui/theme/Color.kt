@@ -1,4 +1,4 @@
-package com.sevban.qlub.ui.theme
+package com.sevban.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
