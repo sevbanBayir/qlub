@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "qlub"
 include(":app")
 include(":core")
+include(":core:network")
