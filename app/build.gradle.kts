@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlinKapt)
 }
 
 android {
@@ -50,7 +51,9 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.model)
     implementation(projects.core.ui)
+    implementation(projects.core.data)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -67,4 +70,16 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Motif
+    kapt(libs.motif.compiler)
+    implementation(libs.motif)
+
+    // RIBs
+    annotationProcessor(libs.rib.compiler.test)
+    implementation(libs.rib.android)
+    implementation(libs.rib.android.compose)
+    implementation(libs.rib.coroutines)
+    testImplementation(libs.rib.test)
+    implementation(libs.appcompat)
 }
