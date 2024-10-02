@@ -8,14 +8,10 @@ import com.uber.rib.core.Bundle
 import com.uber.rib.core.ComposePresenter
 import com.uber.rib.core.coroutineScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.retry
 import kotlinx.coroutines.launch
-import kotlin.time.Duration.Companion.seconds
 
 class MainInteractor(
     presenter: ComposePresenter,
@@ -27,23 +23,15 @@ class MainInteractor(
     override fun didBecomeActive(savedInstanceState: Bundle?) {
         super.didBecomeActive(savedInstanceState)
         coroutineScope.launch {
-            productsOfflineFirstRepository
-                .getProducts()
-                .catch { e ->
-                    e.printStackTrace()
+            productsOfflineFirstRepository.getAggregatedProducts()
+                .retry {
+                    delay(RETRY_INTERVAL)
+                    true
                 }
-                .distinctUntilChanged()
                 .onEach {
                     itemsStream.update(it)
                 }
                 .launchIn(coroutineScope)
-
-            flow {
-                emit(productsOfflineFirstRepository.syncDataSources())
-            }.retry {
-                delay(3.seconds)
-                true
-            }.launchIn(coroutineScope)
         }
 
         router.view.setContent { MainView(childContent = childContent) }
@@ -62,5 +50,9 @@ class MainInteractor(
             router.detachList()
             router.attachDetail(product)
         }
+    }
+
+    companion object {
+        const val RETRY_INTERVAL = 3000L
     }
 }
