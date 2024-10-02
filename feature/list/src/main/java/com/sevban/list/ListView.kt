@@ -39,7 +39,7 @@ fun ListView(viewModel: State<List<ProductViewModel>>, eventStream: EventStream<
             ListItem(
                 headlineContent = { Text(it.title) },
                 supportingContent = { Text(it.description) },
-                trailingContent = { Text(it.price.toString()) },
+                trailingContent = { Text(it.price) },
                 modifier = Modifier
                     .size(100.dp)
                     .clickable { eventStream.notify(ListEvent.OnItemClick(it.id)) }
@@ -55,9 +55,9 @@ fun LoggedOutViewPreview() {
     val viewModel = remember {
         mutableStateOf(
             listOf(
-                ProductViewModel(1, "title1", "description1", 1.2),
-                ProductViewModel(2, "title2", "description2", 2.2),
-                ProductViewModel(3, "title3", "description3", 3.2),
+                ProductViewModel(1, "title1", "description1", "1.2"),
+                ProductViewModel(2, "title2", "description2", "2.2"),
+                ProductViewModel(3, "title3", "description3", "3.2"),
             )
         )
     }
