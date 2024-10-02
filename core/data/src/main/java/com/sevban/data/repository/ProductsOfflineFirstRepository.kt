@@ -7,5 +7,5 @@ import kotlin.time.Duration
 interface ProductsOfflineFirstRepository {
     suspend fun getProducts(): Flow<List<Product>>
     suspend fun getProductById(id: Int): Product
-    suspend fun syncDataSources()
+    fun getAggregatedProducts(): Flow<List<Product>>
 }
