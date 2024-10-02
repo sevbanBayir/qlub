@@ -8,4 +8,8 @@ data class ProductViewModel(
     val title: String = String.EMPTY,
     val description: String = String.EMPTY,
     val price: String = String.EMPTY,
+    val imageUrl: String = String.EMPTY,
+    val rating: String = String.EMPTY,
+    val category: String = String.EMPTY,
+    val reviewCount: String = String.EMPTY
 )

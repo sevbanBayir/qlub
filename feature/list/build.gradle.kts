@@ -72,4 +72,7 @@ dependencies {
     implementation(libs.rib.coroutines)
     testImplementation(libs.rib.test)
     implementation(libs.appcompat)
+
+    // Coil
+    implementation(libs.coil.compose)
 }

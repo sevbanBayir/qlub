@@ -4,11 +4,12 @@ import com.sevban.database.entity.DimensionsEntity
 import com.sevban.database.entity.MetaEntity
 import com.sevban.database.entity.ProductEntity
 import com.sevban.database.entity.ReviewEntity
+import com.sevban.model.Product
+import com.sevban.model.Review
 import com.sevban.network.dto.DimensionsDTO
 import com.sevban.network.dto.MetaDTO
 import com.sevban.network.dto.ProductDTO
 import com.sevban.network.dto.ReviewDTO
-import com.sevban.model.Product
 
 fun ProductDTO.toProductEntity(): ProductEntity {
     return ProductEntity(
@@ -54,7 +55,9 @@ fun ProductEntity.toProduct(): Product {
         images = images,
         tags = tags,
         rating = rating,
-        stock = stock
+        stock = stock,
+        thumbnail = thumbnail,
+        reviews = reviewEntities.map { it.toReview() }
     )
 }
 
@@ -76,6 +79,16 @@ fun DimensionsDTO.toDimensionsEntity(): DimensionsEntity {
         depth = depth,
         height = height,
         width = width
+    )
+}
+
+fun ReviewEntity.toReview(): Review {
+    return Review(
+        rating = rating,
+        reviewerEmail = reviewerEmail,
+        reviewerName = reviewerName,
+        comment = comment,
+        date = date
     )
 }
 
