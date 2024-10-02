@@ -1,24 +1,18 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlinKapt)
 }
 
 android {
-    namespace = "com.sevban.qlub"
+    namespace = "com.sevban.list"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.sevban.qlub"
         minSdk = 26
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -43,19 +37,13 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.14"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
+    implementation(projects.core.common)
     implementation(projects.core.model)
     implementation(projects.core.ui)
     implementation(projects.core.data)
-
-    implementation(projects.feature.list)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -78,7 +66,7 @@ dependencies {
     implementation(libs.motif)
 
     // RIBs
-    annotationProcessor(libs.rib.compiler.test)
+    kapt(libs.rib.compiler.test)
     implementation(libs.rib.android)
     implementation(libs.rib.android.compose)
     implementation(libs.rib.coroutines)
