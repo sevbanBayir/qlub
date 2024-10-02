@@ -41,18 +41,10 @@ interface DataScope {
             return ProductsOfflineFirstRepositoryImpl(productDao, apiService)
         }
 
-        fun cache(context: Context) = Cache(context.cacheDir, (1 * 1024 * 50).toLong())
-        fun okHttpClient(cache: Cache) = OkHttpClient.Builder()
-            .cache(cache)
-            .build()
-
         @Expose
-        fun provideRetrofitService(
-            okHttpClient: OkHttpClient
-        ): RetrofitService {
+        fun provideRetrofitService(): RetrofitService {
             val retrofit = Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
