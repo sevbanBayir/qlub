@@ -35,7 +35,6 @@ data class ProductEntity(
     val thumbnail: String,
     val warrantyInformation: String,
     val weight: Int,
-    val timestamp: Long = System.currentTimeMillis()
 )
 
 class StringListConverter {
