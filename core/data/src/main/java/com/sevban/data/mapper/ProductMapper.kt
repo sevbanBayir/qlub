@@ -58,6 +58,10 @@ fun ProductEntity.toProduct(): Product {
     )
 }
 
+fun List<ProductEntity>.toProductList(): List<Product> {
+    return map { it.toProduct() }
+}
+
 fun MetaDTO.toMetaEntity(): MetaEntity {
     return MetaEntity(
         barcode = barcode,

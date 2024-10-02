@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.sevban.database.entity.ProductEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProductDao {
@@ -17,5 +18,5 @@ interface ProductDao {
     suspend fun getProductById(productId: Int): ProductEntity
 
     @Query("SELECT * FROM products")
-    suspend fun getProducts(): List<ProductEntity>
+    fun getProducts(): Flow<List<ProductEntity>>
 }
