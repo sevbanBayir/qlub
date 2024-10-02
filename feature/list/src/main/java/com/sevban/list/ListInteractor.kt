@@ -39,7 +39,11 @@ class ListInteractor(
                         id = it.id,
                         title = it.title,
                         description = it.description,
-                        price = it.price.toString()
+                        price = it.price.toString(),
+                        imageUrl = it.thumbnail,
+                        rating = it.rating.toString(),
+                        category = it.category,
+                        reviewCount = it.reviews.size.toString()
                     )
                 }
                 stateStream.dispatch(

@@ -16,5 +16,7 @@ data class Product(
     val images: List<String>,
     val tags: List<String>,
     val rating: Double,
-    val stock: Int
+    val stock: Int,
+    val thumbnail: String,
+    val reviews: List<Review>
 )
