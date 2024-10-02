@@ -38,7 +38,8 @@ class ListInteractor(
                     ProductViewModel(
                         id = it.id,
                         title = it.title,
-                        price = it.price
+                        description = it.description,
+                        price = it.price.toString()
                     )
                 }
                 stateStream.dispatch(
