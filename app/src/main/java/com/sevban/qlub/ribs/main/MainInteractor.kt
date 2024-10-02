@@ -7,22 +7,43 @@ import com.uber.rib.core.BasicInteractor
 import com.uber.rib.core.Bundle
 import com.uber.rib.core.ComposePresenter
 import com.uber.rib.core.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.retry
 import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.seconds
 
 class MainInteractor(
     presenter: ComposePresenter,
     private val productsOfflineFirstRepository: ProductsOfflineFirstRepository,
-    val itemsStream: ItemsStream,
     private val childContent: MainRouter.ChildContent,
+    val itemsStream: ItemsStream,
 ) : BasicInteractor<ComposePresenter, MainRouter>(presenter), ListInteractor.Listener {
 
     override fun didBecomeActive(savedInstanceState: Bundle?) {
         super.didBecomeActive(savedInstanceState)
         coroutineScope.launch {
-            val products = productsOfflineFirstRepository.getProducts()
-            itemsStream.update(products)
+            productsOfflineFirstRepository
+                .getProducts()
+                .catch { e ->
+                    e.printStackTrace()
+                }
+                .distinctUntilChanged()
+                .onEach {
+                    itemsStream.update(it)
+                }
+                .launchIn(coroutineScope)
+
+            flow {
+                emit(productsOfflineFirstRepository.syncDataSources())
+            }.retry {
+                delay(3.seconds)
+                true
+            }.launchIn(coroutineScope)
         }
 
         router.view.setContent { MainView(childContent = childContent) }
