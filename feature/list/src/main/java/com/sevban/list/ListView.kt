@@ -1,5 +1,6 @@
 package com.sevban.list
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sevban.common.streams.EventStream
@@ -23,9 +25,11 @@ import com.sevban.ui.theme.QlubTheme
 fun ListView(viewModel: State<List<ProductViewModel>>, eventStream: EventStream<ListEvent>) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
-        modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp, alignment = Alignment.Bottom),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFFF8F9FA)),
+        contentPadding = PaddingValues(20.dp),
+        verticalArrangement = Arrangement.spacedBy(20.dp, alignment = Alignment.Top),
         horizontalArrangement = Arrangement.spacedBy(16.dp, alignment = Alignment.CenterHorizontally)
     ) {
         items(viewModel.value) {
