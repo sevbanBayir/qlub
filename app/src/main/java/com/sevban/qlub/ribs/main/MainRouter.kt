@@ -34,7 +34,8 @@ class MainRouter(
     override fun willAttach() {
         super.willAttach()
         parentView.addView(view)
-        
+
+
         view.setContent { 
             presenter.composable.invoke()
         }
