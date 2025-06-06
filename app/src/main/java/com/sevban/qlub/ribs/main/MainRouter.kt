@@ -15,6 +15,7 @@ import com.sevban.list.ListScope
 import com.sevban.list.ListScopeDependencies
 import com.sevban.model.Product
 import com.uber.rib.core.BasicViewRouter
+import com.uber.rib.core.ComposePresenter
 import motif.ScopeFactory
 
 class MainRouter(
@@ -23,6 +24,7 @@ class MainRouter(
     private val parentView: ViewGroup,
     private val scope: MainScope,
     private val childContent: ChildContent,
+    private val presenter: ComposePresenter,
 ) : BasicViewRouter<ComposeView, MainInteractor>(view, interactor) {
 
     private var listRouter: ListRouter? = null
@@ -32,6 +34,10 @@ class MainRouter(
     override fun willAttach() {
         super.willAttach()
         parentView.addView(view)
+        
+        view.setContent { 
+            presenter.composable.invoke()
+        }
     }
 
     override fun willDetach() {

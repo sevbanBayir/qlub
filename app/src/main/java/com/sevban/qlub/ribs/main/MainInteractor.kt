@@ -34,7 +34,6 @@ class MainInteractor(
                 .launchIn(coroutineScope)
         }
 
-        router.view.setContent { MainView(childContent = childContent) }
         itemsStream
             .observe()
             .onEach {
