@@ -16,7 +16,6 @@ import kotlinx.coroutines.launch
 class MainInteractor(
     presenter: ComposePresenter,
     private val productsOfflineFirstRepository: ProductsOfflineFirstRepository,
-    private val childContent: MainRouter.ChildContent,
     val itemsStream: ItemsStream,
 ) : BasicInteractor<ComposePresenter, MainRouter>(presenter), ListInteractor.Listener {
 
