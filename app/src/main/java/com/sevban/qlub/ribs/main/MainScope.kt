@@ -14,14 +14,7 @@ interface MainScope {
 
     @motif.Objects
     abstract class Objects {
-        fun router(
-            view: ComposeView,
-            interactor: MainInteractor,
-            parentView: ViewGroup,
-            childContent: MainRouter.ChildContent,
-        ): MainRouter {
-            return MainRouter(view, interactor, parentView, childContent)
-        }
+        abstract fun router(): MainRouter
 
         abstract fun interactor(): MainInteractor
 
