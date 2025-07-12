@@ -23,7 +23,7 @@ class RootRouter(
 
     private fun attachMain() {
         if (mainRouter == null) {
-            mainRouter = scope.mainScope(view, scope.databaseScope().productRepository()).router()
+            mainRouter = scope.mainScope(view, scope.dataScope().productRepository()).router()
                 .also { attachChild(it) }
         }
     }

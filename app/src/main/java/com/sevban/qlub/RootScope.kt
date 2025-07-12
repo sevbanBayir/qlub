@@ -19,7 +19,7 @@ interface RootScope {
         productsOfflineFirstRepository: ProductsOfflineFirstRepository
     ): MainScope
 
-    fun databaseScope(): DataScope
+    fun dataScope(): DataScope
 
     @motif.Objects
     abstract class Objects {
