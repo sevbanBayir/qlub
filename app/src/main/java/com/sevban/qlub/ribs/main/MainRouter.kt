@@ -22,9 +22,7 @@ class MainRouter(
     view: ComposeView,
     interactor: MainInteractor,
     private val parentView: ViewGroup,
-    private val scope: MainScope,
     private val childContent: ChildContent,
-    private val presenter: ComposePresenter,
 ) : BasicViewRouter<ComposeView, MainInteractor>(view, interactor) {
 
     private var listRouter: ListRouter? = null
@@ -35,8 +33,9 @@ class MainRouter(
         super.willAttach()
         parentView.addView(view)
 
-        view.setContent { 
-            presenter.composable.invoke()
+        // Direct UI setup - no presenter needed for simple container
+        view.setContent {
+            MainView(childContent)
         }
     }
 

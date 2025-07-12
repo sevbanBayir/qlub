@@ -5,7 +5,7 @@ import com.sevban.data.repository.ProductsOfflineFirstRepository
 import com.sevban.list.ListInteractor
 import com.uber.rib.core.BasicInteractor
 import com.uber.rib.core.Bundle
-import com.uber.rib.core.ComposePresenter
+import com.uber.rib.core.EmptyPresenter
 import com.uber.rib.core.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
@@ -14,10 +14,10 @@ import kotlinx.coroutines.flow.retry
 import kotlinx.coroutines.launch
 
 class MainInteractor(
-    presenter: ComposePresenter,
+    presenter: EmptyPresenter,
     private val productsOfflineFirstRepository: ProductsOfflineFirstRepository,
     val itemsStream: ItemsStream,
-) : BasicInteractor<ComposePresenter, MainRouter>(presenter), ListInteractor.Listener {
+) : BasicInteractor<EmptyPresenter, MainRouter>(presenter), ListInteractor.Listener {
 
     override fun didBecomeActive(savedInstanceState: Bundle?) {
         super.didBecomeActive(savedInstanceState)
